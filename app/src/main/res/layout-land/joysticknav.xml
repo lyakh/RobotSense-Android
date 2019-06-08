@@ -6,6 +6,15 @@
     android:orientation="vertical"
     android:background="@android:color/holo_blue_dark">
 
+    <android.support.v7.widget.Toolbar
+       android:id="@+id/main_toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       android:background="@android:color/darker_gray"
+       android:elevation="4dp"
+       android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <me.playground.robotsense.Sensor
         android:id="@+id/sensor"
         android:layout_width="match_parent"

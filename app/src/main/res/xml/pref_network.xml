@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <EditTextPreference
+	android:id="@+id/ip_address"
+        android:defaultValue="@string/pref_default_ip_address"
+        android:inputType="number|numberDecimal"
+	android:digits="0123456789."
+        android:key="ip_address"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_ip_address" />
+
+    <EditTextPreference
+	android:id="@+id/port_number"
+        android:defaultValue="@string/pref_default_port_number"
+        android:inputType="number|numberDecimal"
+	android:digits="0123456789"
+        android:key="port_number"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_port_number" />
+
+</PreferenceScreen>

@@ -3,18 +3,13 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="me.playground.robotsense.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_info_black_24dp"
-        android:title="@string/pref_header_general" />
+        android:fragment="me.playground.robotsense.SettingsActivity$NetworkPreferenceFragment"
+        android:icon="@drawable/baseline_settings_ethernet_black_18dp"
+        android:title="@string/pref_header_network" />
 
     <header
-        android:fragment="me.playground.robotsense.SettingsActivity$NotificationPreferenceFragment"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/pref_header_notifications" />
-
-    <header
-        android:fragment="me.playground.robotsense.SettingsActivity$DataSyncPreferenceFragment"
-        android:icon="@drawable/ic_sync_black_24dp"
-        android:title="@string/pref_header_data_sync" />
+        android:fragment="me.playground.robotsense.SettingsActivity$VehiclePreferenceFragment"
+        android:icon="@drawable/baseline_directions_car_black_18dp"
+        android:title="@string/pref_header_vehicle" />
 
 </preference-headers>

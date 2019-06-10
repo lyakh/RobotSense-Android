@@ -1,6 +1,8 @@
 package me.playground.robotsense;
 
 import android.content.Context;
+import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,10 +10,9 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
-import android.util.Log;
 
 public class Sensor extends SurfaceView implements SurfaceHolder.Callback {
 	private String TAG = "Sensor";
@@ -37,6 +38,8 @@ public class Sensor extends SurfaceView implements SurfaceHolder.Callback {
 	private double sonar_angle, chassis_angle, power;
 	private static final int limit = 15;
 	private static final int floatToInt = 100000000;
+	private String ipAddress;
+	private int portNumber;
 
 	public Sensor(Context context) {
 		this(context, null);
@@ -79,6 +82,12 @@ public class Sensor extends SurfaceView implements SurfaceHolder.Callback {
 		}
 	}
 
+	public void configure(String address, int port) {
+		Log.i(TAG, "configure() " + address + ":" + port);
+		ipAddress = address;
+		portNumber = port;
+	}
+
 	@Override
 	public void draw(Canvas canvas) {
 		if (canvas == null) return;
@@ -99,8 +108,10 @@ public class Sensor extends SurfaceView implements SurfaceHolder.Callback {
 		gameLoop = new GameLoop(this);
 		gameLoop.setRunning(true);
 
+		Log.i(TAG, "surfaceCreated() " + ipAddress + ":" + portNumber);
+
 		if (net == null) {
-			net = new NetLink();
+			net = new NetLink(ipAddress, portNumber);
 
 			new Thread(net).start();
 		}

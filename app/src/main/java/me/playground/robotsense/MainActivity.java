@@ -9,6 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import me.playground.robotsense.R;
 
 import com.erz.joysticklibrary.JoyStick;
 
@@ -16,13 +19,22 @@ import com.erz.joysticklibrary.JoyStick;
 public class MainActivity extends AppCompatActivity implements JoyStick.JoyStickListener {
     private String TAG = "RSense";
     private Sensor sensor;
+    private String ipAddress;
+    private int port;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.joysticknav);
 
+        PreferenceManager.setDefaultValues(this, R.xml.pref_network, false);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        ipAddress = pref.getString("ip_address", null);
+        port = Integer.parseInt(pref.getString("port_number", null));
+
         sensor = (Sensor) findViewById(R.id.sensor);
+        sensor.configure(ipAddress, port);
 
         JoyStick joy1 = (JoyStick) findViewById(R.id.joy1);
         joy1.setListener(this);

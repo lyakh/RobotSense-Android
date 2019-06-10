@@ -35,7 +35,6 @@ import java.io.FileInputStream;
 import java.io.BufferedInputStream;
 
 import android.os.Handler;
-
 import android.util.Log;
 
 public class NetLink implements Runnable {
@@ -43,8 +42,8 @@ public class NetLink implements Runnable {
 	private SSLContext context = null;
 	private DataInputStream in = null;
 	private DataOutputStream out;
-	private final int port = 5678;
-	private final String ip_address = "192.168.0.100";
+	private int portNumber;
+	private String ipAddress;
 	private ControlResponse newCR;
 	private boolean sent = false;
 	private int oldAngle, newAngle;
@@ -93,9 +92,12 @@ public class NetLink implements Runnable {
 		      cr.advance + ", " + cr.turn);
 	}
 
-	public NetLink() {
+	public NetLink(String address, int port) {
 		newCR = new ControlResponse();
 		newAngle = 0;
+
+		ipAddress = address;
+		portNumber = port;
 
 		// Load CAs from an InputStream
 		// (could be from a resource or ByteArrayInputStream or ...)
@@ -198,10 +200,11 @@ public class NetLink implements Runnable {
 			return -1;
 
 		try {
+
 			sock = (SSLSocket)context.getSocketFactory().createSocket(
-				ip_address, port);
+				ipAddress, portNumber);
 		} catch (IOException e) {
-			Log.e(TAG, "sock: IOException");
+			Log.e(TAG, "sock: IOException " + ipAddress + ":" + portNumber);
 			return -1;
 		}
 
